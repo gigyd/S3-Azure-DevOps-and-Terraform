@@ -28,3 +28,11 @@ stages:
         Dockerfile: '**/Dockerfile'
         tags: |
           $(tag)
+
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'GigydSnyk'
+        testType: 'app'
+        targetFile: 'Dockerfile'
+        monitorWhen: 'always'
+        failOnIssues: true
